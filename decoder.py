@@ -1,8 +1,8 @@
-import torch
 import torch.nn as nn
 from attention import MultiHeadAttention
 from feed_forward import FeedForward
 from mask import get_attn_subsequent_mask
+
 
 class DecoderLayer(nn.Module):
 
@@ -14,22 +14,17 @@ class DecoderLayer(nn.Module):
         self.feedforward = FeedForward(adim, ffdim, dropout_rate)
 
     def forward(self, y, subseq_mask, h, h_mask):
-        res = y
         # self attention
+        res = y
         out = self.attention(y, y, y, subseq_mask)
-        # add&norm
         y = self.norm(res + self.dropout(out))
-
-        res = y
         # source attention
-        out = self.attention(y, h, h, h_mask)
-        # add&norm
-        y = self.norm(res + self.dropout(out))
-
         res = y
-        # feed forward part
+        out = self.attention(y, h, h, h_mask)
+        y = self.norm(res + self.dropout(out))
+        # feed forward
+        res = y
         out = self.feedforward(y)
-        # add&norm
         y = self.norm(res + self.dropout(out))
         return y
 

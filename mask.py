@@ -1,3 +1,8 @@
+"""
+Modified from
+https://github.com/sooftware/speech-transformer/
+"""
+
 import torch
 
 

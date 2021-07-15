@@ -17,5 +17,4 @@ class Transformer(nn.Module):
         h, h_mask = self.encoder(x, x_len)
         out = self.decoder(sos_y, h, h_mask)
         loss = self.loss_fn(out.transpose(-2,-1).contiguous(), y_eos)
-        return loss, out
-        # return self.decoder(*((sos_y,) + self.encoder(x, x_len)))
+        return loss

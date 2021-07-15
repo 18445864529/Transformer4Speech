@@ -21,17 +21,3 @@ class PositionEncoding(nn.Module):
     def forward(self, x):
         return self.pe[:, :x.size(1)]
 
-
-class Embedding(nn.Module):
-    """
-    Embedding layer. Similarly to other sequence transduction models, speech_transformer use learned embeddings
-    to convert the input tokens and output tokens to vectors of dimension d_model.
-    In the embedding layers, speech_transformer multiply those weights by sqrt(d_model)
-    """
-    def __init__(self, num_embeddings, pad_id, d_model=512):
-        super(Embedding, self).__init__()
-        self.sqrt_dim = math.sqrt(d_model)
-        self.embedding = nn.Embedding(num_embeddings, d_model, padding_idx=pad_id)
-
-    def forward(self, inputs):
-        return self.embedding(inputs) * self.sqrt_dim
