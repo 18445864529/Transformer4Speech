@@ -7,7 +7,10 @@ import torch
 
 
 def get_attn_pad_mask(x, x_len):
-    """ mask position is set to True(1) """
+    """
+    mask position is set to True(1)
+    returned mask shape: B, 1, T
+    """
 
     def get_transformer_non_pad_mask(x, x_len):
         """ Padding position is set to 0, either use x_len or pad_id """
@@ -32,6 +35,7 @@ def get_attn_pad_mask(x, x_len):
 
 
 def get_attn_subsequent_mask(seq):
+    """masked position set to True"""
     assert seq.dim() == 2
     attn_shape = [seq.size(0), seq.size(1), seq.size(1)]
     subsequent_mask = torch.triu(torch.ones(attn_shape), diagonal=1)
