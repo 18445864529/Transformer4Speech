@@ -45,7 +45,7 @@ class BaseDataLoader:
             x_len_list.append(torch.tensor(x).size(0))
             y_list.append(torch.tensor(y).long())
         padded_x = torch.nn.utils.rnn.pad_sequence(x_list, batch_first=True)
-        padded_y = torch.nn.utils.rnn.pad_sequence(y_list, batch_first=True)
+        padded_y = torch.nn.utils.rnn.pad_sequence(y_list, batch_first=True, padding_value=-1)
         x_len = torch.tensor(x_len_list)
         # print(padded_x)
         # y = torch.stack(y_list, dim=0)
