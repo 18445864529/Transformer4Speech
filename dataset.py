@@ -71,5 +71,5 @@ if __name__ == '__main__':
         print(x.shape)  # torch.Size([batch, 2974, 160])
         print(x_len)
         print(y.size())
-        if i == 1:
+        if i == 2:
             break
