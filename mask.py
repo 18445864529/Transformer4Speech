@@ -46,7 +46,7 @@ def get_attn_subsequent_mask(seq):
     return subsequent_mask.eq(1)
 
 
-def add_sos_eos(y, padded_value=0, sos_eos_value=-1):
+def add_sos_eos(y, sos_eos_value, padded_value=-1):
     sos = y.new_full((y.size(0), 1), sos_eos_value)
     sos_y = torch.cat([sos, y], dim=-1)
     eos = y.new([sos_eos_value])

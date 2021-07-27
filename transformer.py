@@ -13,8 +13,8 @@ class Transformer(nn.Module):
         self.loss_fn = nn.CrossEntropyLoss()
 
     def forward(self, x, x_len, y):
-        sos_y, y_eos = add_sos_eos(y, padded_value=0, sos_eos_value=self.odim-1)
+        sos_y, y_eos = add_sos_eos(y, sos_eos_value=self.odim - 1, padded_value=-1)
         h, h_mask = self.encoder(x, x_len)
         out = self.decoder(sos_y, h, h_mask)
-        loss = self.loss_fn(out.transpose(-2,-1).contiguous(), y_eos)
+        loss = self.loss_fn(out.transpose(-2, -1).contiguous(), y_eos)
         return loss
