@@ -1,0 +1,15 @@
+#path
+token_path: ./data/libri.csv
+feature_directory: ../Dataset/LibriSpeech/feature/
+model_directory: ./model_save
+result_directory: ./result
+
+dic_dim: 59662
+feature_dim: 160
+# training arguments
+learning_rate: 1e-5
+weight_decay: 0.1
+epoch: 2
+batch_size: 4
+shuffle: True
+trial: 1
