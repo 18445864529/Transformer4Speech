@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 from torch.utils import data
 from utiles import yaml_load
-from tqdm import tqdm
 from ast import literal_eval
 
 config = yaml_load('config.yaml')
@@ -45,7 +44,7 @@ class BaseDataLoader:
             x_len_list.append(torch.tensor(x).size(0))
             y_list.append(torch.tensor(y).long())
         padded_x = torch.nn.utils.rnn.pad_sequence(x_list, batch_first=True)
-        padded_y = torch.nn.utils.rnn.pad_sequence(y_list, batch_first=True, padding_value=-1)
+        padded_y = torch.nn.utils.rnn.pad_sequence(y_list, batch_first=True)
         x_len = torch.tensor(x_len_list)
         # print(padded_x)
         # y = torch.stack(y_list, dim=0)
